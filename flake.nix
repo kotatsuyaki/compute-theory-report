@@ -19,7 +19,7 @@
         ];
         fonts-conf = pkgs.makeFontsConf {
           fontDirectories = [
-            pkgs.source-han-serif
+            pkgs.source-han-sans
             pkgs.edukai
           ];
         };

@@ -1,4 +1,4 @@
-# $\TM = \NTM$
+# TM = NTM
 
 ::: {.定理 info="$\TM = \NTM$"}
 給定任意的非確定型圖靈機[^1]$N$，
@@ -57,7 +57,7 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
 [^5]: 分歧度 = Degree
 
 
-# Rice Theorem
+# Rice's Theorem
 
 ::: {.定理 info="Rice's Theorem"}
 令 $P$ 為一語言，使得下列兩條件成立，則 $P$ 是不可判定[^6]的。

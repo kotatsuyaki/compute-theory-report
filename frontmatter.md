@@ -29,6 +29,7 @@ header-includes:
   - |
     \DeclareMathOperator{\TM}{\mathsf{TM}}
     \DeclareMathOperator{\NTM}{\mathsf{NTM}}
+    \DeclareMathOperator{\ITM}{\mathsf{INFINITE}_{\text{TM}}}
     \DeclareMathOperator{\ATM}{\mathit{A}_{\text{TM}}}
     \DeclareMathOperator{\Lang}{L}
   - |
@@ -36,10 +37,9 @@ header-includes:
     \DeclarePairedDelimiter{\Desc}{\langle}{\rangle}
 
 amsthm:
-  counter_depth: 2
+  counter_depth: 0
   definition:
     - 定義
-  parent_counter: section
   plain:
     - Theorem:
       - 定理

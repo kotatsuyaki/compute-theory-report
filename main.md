@@ -5,7 +5,7 @@
 存在確定型圖靈機[^2]$D$使得$L(N) = L(D)$。
 :::
 
-::: {.proof info="證明"}
+::: {.proof}
 令$N$為一非確定型圖靈機。
 已知多帶圖靈機[^3]與確定型圖靈機具有相同的計算能力，
 故若我們可以建構出多帶圖靈機$D$使得$L(N) = L(D)$，
@@ -67,12 +67,13 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
    但不是所有的圖靈機的敘述都屬於 $P$。
 2. $P$ 是語言的性質；
    亦即若 $\Lang(M_1) = \Lang(M_2)$，
+
    則 $\Desc{M_1} \in P \Leftrightarrow \Desc{M_2} \in P$。
    換句話說，一個圖靈機的敘述是否屬於 $P$，
    只與該圖靈機對應的語言有關。
 :::
 
-::: {.proof info="證明"}
+::: {.proof}
 我們以反證法證明 Rice's Theorem。
 假設 $P$ 是可判定的。
 令 $M_P$ 為判定 $P$ 的圖靈機。
@@ -111,6 +112,21 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
 因此 $S$ 可以判定 $\ATM$。
 然而已知 $\ATM$ 是一個不可判定的語言，
 所以此為矛盾 $\implies P$ 不可判定。
+:::
+
+以下舉例說明如何使用 Rice's Theorem
+證明 $\ITM = \Big\{ \Desc{M} \Big | |\Lang(M)| = \infty \Big\}$ 的不可判定性。
+
+::: {.proof}
+要使用 Rice's Theorem，我們需要驗證 $\ITM$ 是否符合定理的兩個前提。
+
+1. 令 $T_{\text{all}}$ 為接受所有輸入字串的圖靈機。
+   因 $\Desc{ T_{\text{all}} } \in \ITM$ 且 $\Desc{ T_\emptyset } \not \in \ITM$，
+   故 $\ITM$ 是非平凡的。
+2. $\ITM$ 的定義只與 $\Lang(M)$ 有關，
+   故 $\ITM$ 是語言的性質。
+
+$\ITM$ 符合 Rice's Theorem 的兩個前提，因此 $\ITM$ 是不可判定的。
 :::
 
 [^6]: 不可判定 = Undecidable

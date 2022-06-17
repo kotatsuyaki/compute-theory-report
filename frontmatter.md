@@ -29,7 +29,11 @@ header-includes:
   - |
     \DeclareMathOperator{\TM}{\mathsf{TM}}
     \DeclareMathOperator{\NTM}{\mathsf{NTM}}
+    \DeclareMathOperator{\ATM}{\mathit{A}_{\text{TM}}}
     \DeclareMathOperator{\Lang}{L}
+  - |
+    \usepackage{mathtools}
+    \DeclarePairedDelimiter{\Desc}{\langle}{\rangle}
 
 amsthm:
   counter_depth: 2

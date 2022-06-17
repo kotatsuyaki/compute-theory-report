@@ -59,4 +59,65 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
 
 # Rice Theorem
 
+::: {.定理 info="Rice's Theorem"}
+令 $P$ 為一語言，使得下列兩條件成立，則 $P$ 是不可判定[^6]的。
+
+1. $P$ 是非平凡[^7]的；
+   亦即存在圖靈機 $M$使得$\Desc{M} \in P$，
+   但不是所有的圖靈機的敘述都屬於 $P$。
+2. $P$ 是語言的性質；
+   亦即若 $\Lang(M_1) = \Lang(M_2)$，
+   則 $\Desc{M_1} \in P \Leftrightarrow \Desc{M_2} \in P$。
+   換句話說，一個圖靈機的敘述是否屬於 $P$，
+   只與該圖靈機對應的語言有關。
+:::
+
+::: {.proof info="證明"}
+我們以反證法證明 Rice's Theorem。
+假設 $P$ 是可判定的。
+令 $M_P$ 為判定 $P$ 的圖靈機。
+我們將使用 $M_P$ 來建構出可判定 $\ATM$ 的圖靈機。
+
+令 $T_\emptyset$ 為一拒絕所有輸入的圖靈機。$\Lang(T_\emptyset) = \emptyset$。
+不失一般性[^8]，假設 $\Desc{T_\emptyset} \not \in P$。
+由條件1，令 $T$ 為圖靈機，使得 $\Desc{T} \in P$。
+
+利用 $P$ 可以「分辨」出 $T_\emptyset$ 與 $T$ 之間差異的能力，
+對於輸入 $\Desc{M, \omega}$，設計以下圖靈機 $S$ ，作為 $\ATM$ 的判定器。
+
+1. 利用 $M$ 與 $\omega$ 來建構圖靈機 $M_\omega$：
+
+   對於輸入 $x$，
+
+   a. 以 $\omega$ 作為輸入模擬 $M$ 的執行。
+      若 $M$ 拒絕，則拒絕。
+   b. 以 $x$ 作為輸入模擬 $T$ 的執行。
+      若 $T$ 接受，則接受。
+2. 以 $R_P$ 來判斷 $\Desc{M_\omega}$ 是否屬於 $P$。
+   若 $\Desc{M_\omega} \in P$，則接受。
+   若 $\Desc{M_\omega} \not \in P$，則拒絕。
+
+為什麼 $S$ 可以判定 $\ATM$ 呢？
+我們可以討論兩種情形，分析 $S$ 的行為。
+
+- 若 $M$ 接受 $\omega$ ，則 $M_\omega$ 會進入步驟 1b 
+  $\implies \Lang(M_\omega) = \Lang(T)$
+  $\implies \Desc{M_\omega} \in P$
+- 若 $M$ 拒絕 $\omega$ ，則 $M_\omega$ 會拒絕所有輸入字串 $x$
+  $\implies \Lang(M_\omega) = \Lang(T_\emptyset)$
+  $\implies \Desc{M_\omega} \not \in P$
+
+我們可以看出 $\Desc{M_\omega} \in P$ 若且唯若 $M$ 接受 $\omega$，
+因此 $S$ 可以判定 $\ATM$。
+然而已知 $\ATM$ 是一個不可判定的語言，
+所以此為矛盾 $\implies P$ 不可判定。
+:::
+
+[^6]: 不可判定 = Undecidable
+[^7]: 非平凡 = Nontrivial
+[^8]: 若 $\Desc{T_\emptyset} \in P$，
+      則整個證明可以改以 $\overline{P}$ 來進行，
+      使得 $\Desc{T_\emptyset} \not \in P$。
+
+
 # Post Correspondence Problem

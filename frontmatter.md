@@ -5,7 +5,7 @@ title: '計算理論期末報告'
 subtitle: 'Theory of Computation, NTHU'
 author: '107021129 黃明瀧'
 date: 2022-06-17
-fontsize: 12pt
+fontsize: 11pt
 
 maketitle: true
 colorlinks: true
@@ -29,6 +29,20 @@ header-includes:
   - |
     \DeclareMathOperator{\TM}{\mathsf{TM}}
     \DeclareMathOperator{\NTM}{\mathsf{NTM}}
+    \DeclareMathOperator{\Lang}{L}
 
-
+amsthm:
+  counter_depth: 2
+  definition:
+    - 定義
+  parent_counter: section
+  plain:
+    - Theorem:
+      - 定理
+      - 引理
+      - 推論
+  counter_ignore_headings:
+    - List of Figures
+    - List of Tables
+    - List of Listings
 ---

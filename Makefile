@@ -10,6 +10,7 @@ main.pdf: main.md frontmatter.md
 		--template=eisvogel \
 		--pdf-engine=xelatex \
 		--listings \
+		--filter=amsthm \
 		--filter=pandoc-crossref \
 		--citeproc \
 		--bibliography=./cite.bibtex \

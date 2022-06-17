@@ -962,7 +962,7 @@ $if(maketitle)$
 \vspace*{-1\baselineskip}
 {\LARGE \textbf{\thetitle}}\\[0.5\baselineskip]
 {\color{gray}\Large $subtitle$\hfill{\large \theauthor}}
-\vspace{-0.5\baselineskip}
+% \vspace{-0.5\baselineskip}
 $endif$
 $endif$
 $endif$

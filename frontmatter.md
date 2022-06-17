@@ -7,6 +7,11 @@ author: '107021129 黃明瀧'
 date: 2022-06-17
 fontsize: 11pt
 
+abstract: |
+  此份報告的內容基於教科書[@i2toc]編寫，
+  符號與定義多與教科書相同。
+  部分證明細節取自上課教材[@wkhontoc]。
+
 maketitle: true
 colorlinks: true
 

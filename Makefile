@@ -9,7 +9,6 @@ main.pdf: main.md frontmatter.md
 		--data-dir=. \
 		--template=eisvogel \
 		--pdf-engine=xelatex \
-		--listings \
 		--filter=amsthm \
 		--filter=pandoc-crossref \
 		--citeproc \

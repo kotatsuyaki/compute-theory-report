@@ -67,7 +67,6 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
    但不是所有的圖靈機的敘述都屬於 $P$。
 2. $P$ 是語言的性質；
    亦即若 $\Lang(M_1) = \Lang(M_2)$，
-
    則 $\Desc{M_1} \in P \Leftrightarrow \Desc{M_2} \in P$。
    換句話說，一個圖靈機的敘述是否屬於 $P$，
    只與該圖靈機對應的語言有關。
@@ -94,7 +93,7 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
       若 $M$ 拒絕，則拒絕。
    b. 以 $x$ 作為輸入模擬 $T$ 的執行。
       若 $T$ 接受，則接受。
-2. 以 $R_P$ 來判斷 $\Desc{M_\omega}$ 是否屬於 $P$。
+2. 以 $M_P$ 來判斷 $\Desc{M_\omega}$ 是否屬於 $P$。
    若 $\Desc{M_\omega} \in P$，則接受。
    若 $\Desc{M_\omega} \not \in P$，則拒絕。
 
@@ -110,8 +109,9 @@ $$b = \Big |Q \times \Gamma \times \{ L, R \} \Big|$$
 
 我們可以看出 $\Desc{M_\omega} \in P$ 若且唯若 $M$ 接受 $\omega$，
 因此 $S$ 可以判定 $\ATM$。
-然而已知 $\ATM$ 是一個不可判定的語言，
-所以此為矛盾 $\implies P$ 不可判定。
+然而我們已知 $\ATM$ 是一個不可判定的語言，
+所以此結論為矛盾。
+因此， $P$ 不可判定。
 :::
 
 以下舉例說明如何使用 Rice's Theorem
@@ -137,3 +137,112 @@ $\ITM$ 符合 Rice's Theorem 的兩個前提，因此 $\ITM$ 是不可判定的�
 
 
 # Post Correspondence Problem
+
+## PCP 問題簡述
+
+PCP 問題建立在一個以骨牌進行的益智遊戲上。
+每張骨牌形如
+
+$$\DominoS{t}{b} = \Domino{a}{ab}$$
+
+分為上下兩個部分，分別載有一個字串。
+令 $P$ 為一個骨牌的集合，例如
+
+$$P = \left\{ \Domino{b}{ca}, \Domino{a}{ab}, \Domino{ca}{a}, \Domino{abc}{c} \right\}$$
+
+。對於某些 $P$ ，我們可以找到一個（可重複的）骨牌排列方式，
+使得「骨牌上半的所有字符所組成的字串」與「骨牌下半的所有字符鎖組成的字串」相等。
+以前述 $P$ 為例，
+
+$$\Domino{a}{ab} \Domino{b}{ca} \Domino{ca}{a} \Domino{a}{ab} \Domino{abc}{c}$$
+
+即為一個合法的**對應**[^9]。
+判斷一個骨牌的集合 $P$ 是否存在這樣的排列方式，即為波斯特對應問題。
+以形式語言的方式來說：
+
+$$\PCP = \left\{ \Desc{P} \mid| P \text{為一個存在對應的 Post Correspondence Problem 的實例} \right\}$$
+
+可以證明 $\PCP$ 是一個不可判定的語言。
+
+
+## 使用 PCP 做計算
+
+給定一個圖靈機 $M$ ，
+我們可以設計出一組特別的骨牌 $P$ ，
+使得在解 PCP 的過程中，
+骨牌排出的字串模擬了圖靈機的運算過程。
+
+以下以舉例的方式說明用 (M)PCP 模擬計算的方法。
+令 $M$ 為一台「只接受 `01` 並改寫為 `10`」的圖靈機。
+我們可以給出它的轉移函數 $\delta$，以供設計骨牌時參考。
+
+$$\begin{cases}
+q(q_0, 0) &= (q_1, 1, R) \\
+q(q_1, 1) &= (q_\text{accept}, 0, R) \\
+q(q, x) &= (q_\text{reject}, \_, R) \text{ otherwise }
+\end{cases}$$
+
+依據教科書[@i2toc]第229頁所述之骨牌設計方式，
+$P$ 包含下列骨牌。
+
+- Part 1: $\Domino{\#}{\#q_001\#}$
+
+- Part 2: $\Domino{q_00}{1q_1}$, $\Domino{q_11}{0q_\text{accept}}$
+
+- Part 3: 此圖靈機無向左移動的可能，故不適用。
+
+- Part 4: $\Domino{0}{0}$, $\Domino{1}{1}$
+
+- Part 5: $\Domino{\#}{\#}$, $\Domino{\#}{\_\#}$
+
+- Part 6:
+  $\Domino{0q_\text{accept}}{q_\text{accept}}$, $\Domino{q_\text{accept}0}{q_\text{accept}}$,
+  $\Domino{1q_\text{accept}}{q_\text{accept}}$, $\Domino{q_\text{accept}1}{q_\text{accept}}$
+
+- Part 7: $\Domino{q_\text{accept}\#\#}{\#}$
+
+以 $\Domino{\#}{\#q_001\#}$ 作為開頭，
+則一開始我們會得到上下不相等的骨牌：
+
+$$\Domino{\#}{\#\textcolor{red}{q_001\#}}$$
+
+注意紅色的部分以 $q_00$ 開頭。
+若我們想要上下相等的字串，
+則需要上半部以 $q_00$ 開頭的骨牌作為下一張骨牌。
+在 $P$ 中，這樣的骨牌只有一張，故我們得到：
+
+$$\Domino{\#}{\#q_00\textcolor{red}{1\#}} \Domino{q_00}{\textcolor{red}{1q_1}}$$
+
+按照相同的邏輯，
+在每個步驟我們都尋找 $P$ 中符合目前「多出來」的字串的骨牌，
+依序排上，
+則最後可以得到：
+
+$$
+\Domino{\#}{\#\textcolor{blue}{q_001}\#}
+\Domino{q_00}{\textcolor{blue}{1q_1}}
+\Domino{1}{\textcolor{blue}{1}}
+\Domino{\#}{\#}
+\Domino{1}{\textcolor{blue}{1}}
+\Domino{q_11}{\textcolor{blue}{0q_\text{accept}}}
+\Domino{\#}{\#}
+\Domino{1}{\textcolor{blue}{1}}
+\Domino{0q_\text{accept}}{\textcolor{blue}{q_\text{accept}}}
+\Domino{\#}{\#}
+\Domino{1q_\text{accept}}{\textcolor{blue}{q_\text{accept}}}
+\Domino{\#}{\#}
+\Domino{q_\text{accept}\#\#}{\#}
+$$
+
+注意藍色部分以井字號 $\#$ 分隔，
+對應到的即是 $q_001 \vdash 1q_11 \vdash 01q_\text{accept}$ 的計算；
+後方冗餘的項只是因應上下對應所需。
+
+在這個例子中為了舉例方便，
+我們使用了 MPCP 版本，
+亦即第一張骨牌被指定為 $\DominoL{\#}{\#q_001\#}$。
+若要使用 PCP 來進行計算，
+則需要事先在每張骨牌上插入一些 $\star$ 字符，
+用以強迫任何對應必須要以該骨牌開頭。
+
+[^9]: 對應 = Match

@@ -34,12 +34,16 @@ header-includes:
   - |
     \DeclareMathOperator{\TM}{\mathsf{TM}}
     \DeclareMathOperator{\NTM}{\mathsf{NTM}}
-    \DeclareMathOperator{\ITM}{\mathsf{INFINITE}_{\text{TM}}}
-    \DeclareMathOperator{\ATM}{\mathit{A}_{\text{TM}}}
+    \DeclareMathOperator{\ITM}{\mathsf{INFINITE}_{\mathsf{TM}}}
+    \DeclareMathOperator{\ATM}{\mathit{A}_{\mathsf{TM}}}
+    \DeclareMathOperator{\PCP}{\mathsf{PCP}}
     \DeclareMathOperator{\Lang}{L}
   - |
     \usepackage{mathtools}
     \DeclarePairedDelimiter{\Desc}{\langle}{\rangle}
+    \newcommand{\Domino}[2]{\Bigg[\displaystyle\frac{\mathtt{#1}}{\mathtt{#2}}\Bigg]}
+    \newcommand{\DominoS}[2]{\Bigg[\displaystyle\frac{#1}{#2}\Bigg]}
+    \newcommand{\DominoL}[2]{\left[\frac{\mathtt{#1}}{\mathtt{#2}}\right]}
 
 amsthm:
   counter_depth: 0
